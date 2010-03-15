@@ -1,13 +1,10 @@
 <html>
 <head>
   <title>Google maps example</title>
-    <!-- This includes the google maps API code.
-	 You need to put your own key here -->
-    <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAqWWYRzzIpnWhU1fLcO47mRTJQa0g3IQ9GZqIMmInSLzwtGDKaBSIS5bxhaXo0xdAaGYI6fOtXZbxww"
-	type="text/javascript"></script>
+    <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAqWWYRzzIpnWhU1fLcO47mRTJQa0g3IQ9GZqIMmInSLzwtGDKaBSIS5bxhaXo0xdAaGYI6fOtXZbxww" type="text/javascript"></script>
+    <script src="/javascripts/markermanager.js"></script>
 
     <script type="text/javascript">
-        // helper function to create markers
         function createMarker(point,html) {
             var marker = new GMarker(point);
             GEvent.addListener(marker, "click", function() {
@@ -16,16 +13,14 @@
             return marker;
         }
 
-        // this is called when the page loads.
-        // it initializes the map, and creates each marker
         function initialize() {
-            var map = new GMap(document.getElementById("map"));
+            var map = new GMap2(document.getElementById("map"));
             map.addControl(new GSmallMapControl());
-            map.centerAndZoom(new GPoint(145.079277, -37.811438), 5);
+            map.centerAndZoom(new GLatLng(145.079277, -37.811438), 5);
 
             <%@places.each do |place|%>
-            var point = new GPoint(<%=place[:longitude]%>,<%=place[:latitude]%>);
-            var marker = createMarker(point,'<div><%=h place[:description]%></div>')
+            var point = new GLatLng(<%=place[:longitude]%>,<%=place[:latitude]%>);
+            var marker = createMarker(point,'<h4><%=h place[:description]%></h4>')
             map.addOverlay(marker);
             <%end%>
         }

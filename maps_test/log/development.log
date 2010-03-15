@@ -132,3 +132,18 @@ Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/maps_test/show_map]
 Processing MapsTestController#show_map (for 127.0.0.1 at 2010-03-08 20:07:17) [GET]
 Rendering maps_test/show_map
 Completed in 116ms (View: 108, DB: 0) | 200 OK [http://localhost/maps_test/show_map]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-03-12 21:48:46) [GET]
+Rendering maps_test/show_map
+Completed in 233ms (View: 220, DB: 0) | 200 OK [http://localhost/maps_test/show_map/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-03-15 17:52:31) [GET]
+Rendering maps_test/show_map
+Completed in 468ms (View: 372, DB: 0) | 200 OK [http://localhost/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-03-15 17:58:09) [GET]
+Rendering maps_test/show_map
+Completed in 231ms (View: 215, DB: 0) | 200 OK [http://localhost/]
