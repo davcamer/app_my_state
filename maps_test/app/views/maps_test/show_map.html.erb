@@ -17,11 +17,13 @@
             var map = new GMap2(document.getElementById("map"));
             map.addControl(new GSmallMapControl());
             map.centerAndZoom(new GLatLng(145.079277, -37.811438), 5);
+            
+            var manager = new MarkerManager(map);
 
             <%@places.each do |place|%>
             var point = new GLatLng(<%=place[:longitude]%>,<%=place[:latitude]%>);
             var marker = createMarker(point,'<h4><%=h place[:description]%></h4>')
-            map.addOverlay(marker);
+            manager.addMarker(marker);
             <%end%>
         }
     </script>
