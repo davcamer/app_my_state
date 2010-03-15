@@ -15,8 +15,7 @@
 
         function initialize() {
             var map = new GMap2(document.getElementById("map"));
-            map.addControl(new GSmallMapControl());
-            map.centerAndZoom(new GLatLng(145.079277, -37.811438), 5);
+            map.setCenter(new GLatLng(145.079277, -37.811438), 5);
             
             var manager = new MarkerManager(map);
 
