@@ -8,18 +8,18 @@
         function createMarker(point,html) {
             var marker = new GMarker(point);
             GEvent.addListener(marker, "click", function() {
-             marker.openInfoWindowHtml(html);
-             });
+              marker.openInfoWindowHtml(html);
+            });
             return marker;
         }
 
         function initialize() {
             var map = new GMap2(document.getElementById("map"));
-            map.addControl(new GSmallMapControl());
-            map.centerAndZoom(new GLatLng(145.079277, -37.811438), 5);
+            map.setCenter(new GLatLng(-37.811438, 145.079277), 15);
+            map.setUIToDefault();
 
             <%@places.each do |place|%>
-            var point = new GLatLng(<%=place[:longitude]%>,<%=place[:latitude]%>);
+            var point = new GLatLng(<%=place[:latitude]%>,<%=place[:longitude]%>);
             var marker = createMarker(point,'<h4><%=h place[:description]%></h4>')
             map.addOverlay(marker);
             <%end%>
