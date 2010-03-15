@@ -23,8 +23,10 @@
             <%@places.each do |place|%>
             var point = new GLatLng(<%=place[:latitude]%>,<%=place[:longitude]%>);
             var marker = createMarker(point,'<h4><%=h place[:description]%></h4>')
-            manager.addMarker(marker);
+            manager.addMarker(marker, 10);
             <%end%>
+            
+            manager.refresh();
         }
     </script>
 
