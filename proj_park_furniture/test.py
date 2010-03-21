@@ -1,10 +1,10 @@
-#!/usr/bin/env python
+#!/opt/local/bin/python2.6
 # encoding: utf-8
 """
 test.py
 
 Created by David Cameron on 2010-03-08.
-Copyright (c) 2010 __MyCompanyName__. All rights reserved.
+Copyright (c) 2010 David Cameron. All rights reserved.
 """
 
 from pyproj import Proj,transform
@@ -17,6 +17,7 @@ def ENtoLL84(easting,northing):
   return (vlat_utm,vlon_utm)
 
 import csv
+import string
 
 def openCsvReader(filename):
   return csv.reader(open(filename))
@@ -24,10 +25,9 @@ def openCsvReader(filename):
 def openCsvWriter(filename):
   return csv.writer(open(filename, 'w'))
 
-def main():
+def readData():
   reader = openCsvReader('furniture.csv')
   writer = openCsvWriter('furniture_with_gps.csv')
-  ruby = open('ruby_code.txt', 'w')
   
   headers = reader.next()
   writer.writerow(headers + ["latitude","longitude"])
@@ -39,6 +39,12 @@ def main():
   DESCRIPTION_COLUMN = 1
   CATEGORY_COLUMN = 2
   
+  DESCRIPTION = "description"
+  LATITUDE = "latitude"
+  LONGITUDE = "longitude"
+  
+  data = []
+  
   for row in reader:
     easting, northing = row[EASTING_COLUMN], row[NORTHING_COLUMN]
     if easting == '' or northing == '':
@@ -47,9 +53,22 @@ def main():
       continue
     lat, lon = ENtoLL84(easting, northing)
     writer.writerow(row + [lat, lon])
-    ruby.write("              {:description=>'" + row[CATEGORY_COLUMN] + "',:latitude=>'" + str(lat) + "',:longitude=>'" + str(lon) + "'},\n")
+    
+    data.append({DESCRIPTION: row[CATEGORY_COLUMN], LATITUDE: lat, LONGITUDE: lon})
   
   print "had to discard", discarded, "rows"
+  return data
+
+def writeRubyOutput(data):
+  ruby = open('ruby_code.txt', 'w')
+  lineTemplate = string.Template("              {:description=>'$description',:latitude=>'$latitude',:longitude=>'$longitude'},\n")
+
+  for point in data:
+    ruby.write(lineTemplate.substitute(point))
+
+def main():
+  data = readData()
+  writeRubyOutput(data)
 
 if __name__ == '__main__':
 	main()
