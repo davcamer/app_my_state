@@ -84,8 +84,8 @@ def groupByCategory(items):
       groups[category] = []
     groups[category].append(item)
   
-  for key in groups:
-    print len(groups[key]), key
+  for key, value in groups.iteritems():
+    print len(value), key
   
   return groups
 
@@ -97,8 +97,7 @@ def writeJavaScriptOutput(data):
   groupEnd = "];\n"
   
   js = open('data.js', 'w')
-  for key in groups:
-    items = groups[key]
+  for key, items in groups.iteritems():
     js.write(groupStartTemplate.substitute({"key": key}))
     for item in items:
       js.write(lineTemplate.substitute(item))
