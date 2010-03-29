@@ -1,0 +1,29 @@
+a couple of alternatives:
+- GMarkers of each category in their own list. Show/Hide them by walking the list.
+- GMarkers of each category in their own list. Show/Hide them by adding/removing from a single MM.
+- current: each category has an MM, but not sure how to show/hide a category. clear/add?
+
+
+things to do:
+- pictures of each category, shown in the detail bubble
+- more straight info in the detail bubbles
+- icons for each category
+- toggle categories on/off
+- adjust the zoom level at which categories are visible??
+- get a proxy working for the GMaps
+
+
+
+results of processing:
+had to discard 178 rows
+19 Horse Trough
+3093 Litter Bin
+511 Hoop
+46 Information Pillar
+2706 Seat
+269 Drinking Fountain
+107 Picnic Setting
+1516 Bicycle Rails
+18 Bin Corral
+26 Recreation Equipment Item
+49 Barbeque

@@ -133,30 +133,36 @@
     </script>
 
     <style>
-      #categories { float: right; }
+      #map {width:600px;height:400px;}
+      #categories {float:right;}
+      #category_list {border: 2px solid #000;}
+      #category_list ul {list-style: none inside;}
+      #category_list li {list-style-type: none; margin: 5px;}
     </style>
 </head>
 <body onload="initialize()">
-
+<div id="container">
 Here's the map:
 <!-- This is the element in which the map will be displayed. -->
-<div id="map" style="width: 450px; height: 350px"></div>
 <div id="categories">
   <form name="category_toggles">
-    <input type="checkbox" name="trough">Horse Troughs</input>
-    <input type="checkbox" name="bin">Rubbish Bins</input>
-    <input type="checkbox" name="hoop">Hoops</input>
-    <input type="checkbox" name="info">Information Pillars</input>
-    <input type="checkbox" name="seat">Seats</input>
-    <input type="checkbox" name="drink">Drinking Fountains</input>
-    <input type="checkbox" name="picnic">Picnic Settings</input>
-    <input type="checkbox" name="rails">Bicycle Rails</input>
-    <input type="checkbox" name="corral">Bin Corrals</input>
-    <input type="checkbox" name="equip">Recreation Equipment Item</input>
-    <input type="checkbox" name="bbq">Barbeque</input>
+    <ul id="category_list">
+      <li><input type="checkbox" name="trough"></input><label for="trough">Horse Troughs</label></li>
+      <li><input type="checkbox" name="bin"></input><label for="bin">Rubbish Bins</label></li>
+      <li><input type="checkbox" name="hoop"></input><label for="hoop">Hoops</label></li>
+      <li><input type="checkbox" name="info"></input><label for="info">Information Pillars</label></li>
+      <li><input type="checkbox" name="seat"></input><label for="seat">Seats</label></li>
+      <li><input type="checkbox" name="drink"></input><label for="drink">Drinking Fountains</label></li>
+      <li><input type="checkbox" name="picnic"></input><label for="picnic">Picnic Settings</label></li>
+      <li><input type="checkbox" name="rails"></input><label for="rails">Bicycle Rails</label></li>
+      <li><input type="checkbox" name="corral"></input><label for="corral">Bin Corrals</label></li>
+      <li><input type="checkbox" name="equip"></input><label for="equip">Recreation Equipment Item</label></li>
+      <li><input type="checkbox" name="bbq"></input><label for="bbq">Barbeque</label></li>
+    </ul>
   </form>
 </div>
+<div id="map"></div>
 
-
+</div>
 </body>
 </html>
