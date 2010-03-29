@@ -132,12 +132,31 @@
         }
     </script>
 
+    <style>
+      #categories { float: right; }
+    </style>
 </head>
 <body onload="initialize()">
 
 Here's the map:
 <!-- This is the element in which the map will be displayed. -->
 <div id="map" style="width: 450px; height: 350px"></div>
+<div id="categories">
+  <form name="category_toggles">
+    <input type="checkbox" name="trough">Horse Troughs</input>
+    <input type="checkbox" name="bin">Rubbish Bins</input>
+    <input type="checkbox" name="hoop">Hoops</input>
+    <input type="checkbox" name="info">Information Pillars</input>
+    <input type="checkbox" name="seat">Seats</input>
+    <input type="checkbox" name="drink">Drinking Fountains</input>
+    <input type="checkbox" name="picnic">Picnic Settings</input>
+    <input type="checkbox" name="rails">Bicycle Rails</input>
+    <input type="checkbox" name="corral">Bin Corrals</input>
+    <input type="checkbox" name="equip">Recreation Equipment Item</input>
+    <input type="checkbox" name="bbq">Barbeque</input>
+  </form>
+</div>
+
 
 </body>
 </html>
