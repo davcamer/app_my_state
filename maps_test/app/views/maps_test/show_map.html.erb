@@ -3,6 +3,7 @@
   <title>Google maps example</title>
     <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAqWWYRzzIpnWhU1fLcO47mRTJQa0g3IQ9GZqIMmInSLzwtGDKaBSIS5bxhaXo0xdAaGYI6fOtXZbxww" type="text/javascript"></script>
     <script src="/javascripts/markermanager.js"></script>
+    <script src="/javascripts/data.js"></script>
 
     <script type="text/javascript">
         function createMarker(point,html) {
@@ -15,18 +16,119 @@
 
         function initialize() {
             var map = new GMap2(document.getElementById("map"));
-            map.setCenter(new GLatLng(-37.811438, 145.079277), 15);
+            map.setCenter(new GLatLng(-37.8062649904, 144.96165842), 10);
             map.setUIToDefault();
             
-            var manager = new MarkerManager(map);
-
-            <%@places.each do |place|%>
-            var point = new GLatLng(<%=place[:latitude]%>,<%=place[:longitude]%>);
-            var marker = createMarker(point,'<h4><%=h place[:description]%></h4>')
-            manager.addMarker(marker, 10);
-            <%end%>
+            var horseTroughMgr = new MarkerManager(map);
+            var i = Horse_Trough.length;
+            while (i--) {
+              var trough = Horse_Trough[i];
+              var point = new GLatLng(trough.latitude, trough.longitude);
+              var marker = createMarker(point,'<h4>' + trough.category + '</h4>');
+              horseTroughMgr.addMarker(marker, 0);
+            }
+            horseTroughMgr.refresh();
             
-            manager.refresh();
+            var litterBinMgr = new MarkerManager(map);
+            var i = Litter_Bin.length;
+            while (i--) {
+              var bin = Litter_Bin[i];
+              var point = new GLatLng(bin.latitude, bin.longitude);
+              var marker = createMarker(point,'<h4>' + bin.category + '</h4>');
+              litterBinMgr.addMarker(marker, 19);
+            }
+            litterBinMgr.refresh();
+            
+            var hoopMgr = new MarkerManager(map);
+            var i = Hoop.length;
+            while (i--) {
+              var hoop = Hoop[i];
+              var point = new GLatLng(hoop.latitude, hoop.longitude);
+              var marker = createMarker(point,'<h4>' + hoop.category + '</h4>');
+              hoopMgr.addMarker(marker, 15);
+            }
+            hoopMgr.refresh();
+            
+            var informationPillarMgr = new MarkerManager(map);
+            var i = Information_Pillar.length;
+            while (i--) {
+              var info = Information_Pillar[i];
+              var point = new GLatLng(info.latitude, info.longitude);
+              var marker = createMarker(point,'<h4>' + info.category + '</h4>');
+              informationPillarMgr.addMarker(marker, 0);
+            }
+            informationPillarMgr.refresh();
+            
+            var seatMgr = new MarkerManager(map);
+            var i = Seat.length;
+            while (i--) {
+              var seat = Seat[i];
+              var point = new GLatLng(seat.latitude, seat.longitude);
+              var marker = createMarker(point,'<h4>' + seat.category + '</h4>');
+              seatMgr.addMarker(marker, 19);
+            }
+            seatMgr.refresh();
+            
+            var drinkingFountainMgr = new MarkerManager(map);
+            var i = Drinking_Fountain.length;
+            while (i--) {
+              var drink = Drinking_Fountain[i];
+              var point = new GLatLng(drink.latitude, drink.longitude);
+              var marker = createMarker(point,'<h4>' + drink.category + '</h4>');
+              drinkingFountainMgr.addMarker(marker, 15);
+            }
+            drinkingFountainMgr.refresh();
+            
+            var picnicSettingMgr = new MarkerManager(map);
+            var i = Picnic_Setting.length;
+            while (i--) {
+              var picnic = Picnic_Setting[i];
+              var point = new GLatLng(picnic.latitude, picnic.longitude);
+              var marker = createMarker(point,'<h4>' + picnic.category + '</h4>');
+              picnicSettingMgr.addMarker(marker, 14);
+            }
+            picnicSettingMgr.refresh();
+            
+            var bicycleRailMgr = new MarkerManager(map);
+            var i = Bicycle_Rails.length;
+            while (i--) {
+              var rails = Bicycle_Rails[i];
+              var point = new GLatLng(rails.latitude, rails.longitude);
+              var marker = createMarker(point,'<h4>' + rails.category + '</h4>');
+              bicycleRailMgr.addMarker(marker, 17);
+            }
+            bicycleRailMgr.refresh();
+
+            var binCorralMgr = new MarkerManager(map);
+            var i = Bin_Corral.length;
+            while (i--) {
+              var corral = Bin_Corral[i];
+              var point = new GLatLng(corral.latitude, corral.longitude);
+              var marker = createMarker(point,'<h4>' + corral.category + '</h4>');
+              binCorralMgr.addMarker(marker, 14);
+            }
+            binCorralMgr.refresh();
+
+            var recreationEquipmentItemMgr = new MarkerManager(map);
+            var i = Recreation_Equipment_Item.length;
+            while (i--) {
+              var equipment = Recreation_Equipment_Item[i];
+              var point = new GLatLng(equipment.latitude, equipment.longitude);
+              var marker = createMarker(point,'<h4>' + equipment.category + '</h4>');
+              recreationEquipmentItemMgr.addMarker(marker, 12);
+            }
+            recreationEquipmentItemMgr.refresh();
+
+            var barbequeMgr = new MarkerManager(map);
+            var i = Barbeque.length;
+            while (i--) {
+              var bbq = Barbeque[i];
+              var point = new GLatLng(bbq.latitude, bbq.longitude);
+              var marker = createMarker(point,'<h4>' + bbq.category + '</h4>');
+              barbequeMgr.addMarker(marker, 14);
+            }
+            barbequeMgr.refresh();
+
         }
     </script>
 

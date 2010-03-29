@@ -93,12 +93,12 @@ def writeJavaScriptOutput(data):
   groups = groupByCategory(data)
   
   groupStartTemplate = string.Template("var $key = [\n")
-  lineTemplate = string.Template("  {description: '$category', latitude: '$latitude', longitude: '$longitude'},\n")
+  lineTemplate = string.Template("  {category: '$category', latitude: '$latitude', longitude: '$longitude'},\n")
   groupEnd = "];\n"
   
   js = open('data.js', 'w')
   for key, items in groups.iteritems():
-    js.write(groupStartTemplate.substitute({"key": key}))
+    js.write(groupStartTemplate.substitute({"key": key.replace(' ', '_')}))
     for item in items:
       js.write(lineTemplate.substitute(item))
     js.write(groupEnd)
