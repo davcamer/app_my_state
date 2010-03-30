@@ -25,22 +25,22 @@
         };
 
         function toggleMarkers(event) {
+            markers = event.data.list;
             if (this.checked) {
-                markers = event.data.list;
-                mgr = event.data.manager;
                 var i = markers.length;
                 while (i--) {
-                    mgr.addMarker(markers[i], 0);
+                    markers[i].show();
                 }
-                mgr.refresh();
             } else {
-                event.data.manager.clearMarkers();
+                var i = markers.length;
+                while (i--) {
+                    markers[i].hide();
+                }
             }
         };
 
 
-        function setupCategory(map, data, minZoom) {
-            var mgr = new MarkerManager(map);
+        function setupCategory(map, mgr, data, minZoom) {
             var list = [];
 
             var i = data.length;
@@ -51,8 +51,7 @@
               list.push(marker);
               mgr.addMarker(marker, minZoom);
             }
-            mgr.refresh();
-            return { manager: mgr, list: list };
+            return { list: list };
         }
 
 
@@ -61,18 +60,21 @@
             map.setCenter(new GLatLng(-37.8062649904, 144.96165842), 10);
             map.setUIToDefault();
 
-            var trough = setupCategory(map, Horse_Trough, 0);
-            var bin = setupCategory(map, Litter_Bin, 19);
-            var hoop = setupCategory(map, Hoop, 15);
-            var info = setupCategory(map, Information_Pillar, 0);
-            var seat = setupCategory(map, Seat, 19);
-            var drink = setupCategory(map, Drinking_Fountain, 15);
-            var picnic = setupCategory(map, Picnic_Setting, 14);
-            var rails = setupCategory(map, Bicycle_Rails, 14);
-            var corral = setupCategory(map, Bin_Corral, 14);
-            var equip = setupCategory(map, Recreation_Equipment_Item, 12);
-            var bbq = setupCategory(map, Barbeque, 14);
+            var mgr = new MarkerManager(map);
 
+            var trough = setupCategory(map, mgr, Horse_Trough, 0);
+            var bin = setupCategory(map, mgr, Litter_Bin, 19);
+            var hoop = setupCategory(map, mgr, Hoop, 15);
+            var info = setupCategory(map, mgr, Information_Pillar, 0);
+            var seat = setupCategory(map, mgr, Seat, 19);
+            var drink = setupCategory(map, mgr, Drinking_Fountain, 15);
+            var picnic = setupCategory(map, mgr, Picnic_Setting, 14);
+            var rails = setupCategory(map, mgr, Bicycle_Rails, 18);
+            var corral = setupCategory(map, mgr, Bin_Corral, 14);
+            var equip = setupCategory(map, mgr, Recreation_Equipment_Item, 12);
+            var bbq = setupCategory(map, mgr, Barbeque, 14);
+
+            mgr.refresh();
 
             $("#category_list input[name='trough']").bind("change", trough, toggleMarkers);
             $("#category_list input[name='bin']").bind("change", bin, toggleMarkers);
