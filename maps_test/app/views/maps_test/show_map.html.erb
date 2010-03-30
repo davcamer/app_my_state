@@ -1,9 +1,19 @@
 <html>
 <head>
   <title>Google maps example</title>
+
+  <style>
+    #map {width:600px;height:400px;}
+    #categories {float:right;}
+    #category_list {border: 2px solid #000;}
+    #category_list ul {list-style: none inside;}
+    #category_list li {list-style-type: none; margin: 5px;}
+  </style>
+  
     <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAqWWYRzzIpnWhU1fLcO47mRTJQa0g3IQ9GZqIMmInSLzwtGDKaBSIS5bxhaXo0xdAaGYI6fOtXZbxww" type="text/javascript"></script>
     <script src="/javascripts/markermanager.js"></script>
     <script src="/javascripts/data.js"></script>
+    <script src="/javascripts/jquery-1.4.2.js"></script>
 
     <script type="text/javascript">
         function createMarker(point,html) {
@@ -18,17 +28,19 @@
             var map = new GMap2(document.getElementById("map"));
             map.setCenter(new GLatLng(-37.8062649904, 144.96165842), 10);
             map.setUIToDefault();
-            
+
             var horseTroughMgr = new MarkerManager(map);
+            var horseTroughMarkers = [];
             var i = Horse_Trough.length;
             while (i--) {
               var trough = Horse_Trough[i];
               var point = new GLatLng(trough.latitude, trough.longitude);
               var marker = createMarker(point,'<h4>' + trough.category + '</h4>');
+              horseTroughMarkers.push(marker);
               horseTroughMgr.addMarker(marker, 0);
             }
             horseTroughMgr.refresh();
-            
+
             var litterBinMgr = new MarkerManager(map);
             var i = Litter_Bin.length;
             while (i--) {
@@ -38,7 +50,7 @@
               litterBinMgr.addMarker(marker, 19);
             }
             litterBinMgr.refresh();
-            
+
             var hoopMgr = new MarkerManager(map);
             var i = Hoop.length;
             while (i--) {
@@ -48,7 +60,7 @@
               hoopMgr.addMarker(marker, 15);
             }
             hoopMgr.refresh();
-            
+
             var informationPillarMgr = new MarkerManager(map);
             var i = Information_Pillar.length;
             while (i--) {
@@ -58,7 +70,7 @@
               informationPillarMgr.addMarker(marker, 0);
             }
             informationPillarMgr.refresh();
-            
+
             var seatMgr = new MarkerManager(map);
             var i = Seat.length;
             while (i--) {
@@ -68,7 +80,7 @@
               seatMgr.addMarker(marker, 19);
             }
             seatMgr.refresh();
-            
+
             var drinkingFountainMgr = new MarkerManager(map);
             var i = Drinking_Fountain.length;
             while (i--) {
@@ -78,7 +90,7 @@
               drinkingFountainMgr.addMarker(marker, 15);
             }
             drinkingFountainMgr.refresh();
-            
+
             var picnicSettingMgr = new MarkerManager(map);
             var i = Picnic_Setting.length;
             while (i--) {
@@ -88,7 +100,7 @@
               picnicSettingMgr.addMarker(marker, 14);
             }
             picnicSettingMgr.refresh();
-            
+
             var bicycleRailMgr = new MarkerManager(map);
             var i = Bicycle_Rails.length;
             while (i--) {
@@ -129,35 +141,44 @@
             }
             barbequeMgr.refresh();
 
+
+            $("#category_list input[name='trough']").bind("change", {manager: horseTroughMgr, list: horseTroughMarkers}, function(event) {
+                if (this.checked) {
+                    markers = event.data.list;
+                    mgr = event.data.manager;
+                    var i = markers.length;
+                    while (i--) {
+                        mgr.addMarker(markers[i], 0);    
+                    }
+                    mgr.refresh();
+                } else {
+                    event.data.manager.clearMarkers();
+                }
+            })
         }
+
+        $(initialize);
     </script>
 
-    <style>
-      #map {width:600px;height:400px;}
-      #categories {float:right;}
-      #category_list {border: 2px solid #000;}
-      #category_list ul {list-style: none inside;}
-      #category_list li {list-style-type: none; margin: 5px;}
-    </style>
 </head>
-<body onload="initialize()">
+<body>
 <div id="container">
 Here's the map:
 <!-- This is the element in which the map will be displayed. -->
 <div id="categories">
   <form name="category_toggles">
     <ul id="category_list">
-      <li><input type="checkbox" name="trough"></input><label for="trough">Horse Troughs</label></li>
-      <li><input type="checkbox" name="bin"></input><label for="bin">Rubbish Bins</label></li>
-      <li><input type="checkbox" name="hoop"></input><label for="hoop">Hoops</label></li>
-      <li><input type="checkbox" name="info"></input><label for="info">Information Pillars</label></li>
-      <li><input type="checkbox" name="seat"></input><label for="seat">Seats</label></li>
-      <li><input type="checkbox" name="drink"></input><label for="drink">Drinking Fountains</label></li>
-      <li><input type="checkbox" name="picnic"></input><label for="picnic">Picnic Settings</label></li>
-      <li><input type="checkbox" name="rails"></input><label for="rails">Bicycle Rails</label></li>
-      <li><input type="checkbox" name="corral"></input><label for="corral">Bin Corrals</label></li>
-      <li><input type="checkbox" name="equip"></input><label for="equip">Recreation Equipment Item</label></li>
-      <li><input type="checkbox" name="bbq"></input><label for="bbq">Barbeque</label></li>
+      <li><input type="checkbox" name="trough"><label for="trough">Horse Troughs</label></li>
+      <li><input type="checkbox" name="bin"><label for="bin">Rubbish Bins</label></li>
+      <li><input type="checkbox" name="hoop"><label for="hoop">Hoops</label></li>
+      <li><input type="checkbox" name="info"><label for="info">Information Pillars</label></li>
+      <li><input type="checkbox" name="seat"><label for="seat">Seats</label></li>
+      <li><input type="checkbox" name="drink"><label for="drink">Drinking Fountains</label></li>
+      <li><input type="checkbox" name="picnic"><label for="picnic">Picnic Settings</label></li>
+      <li><input type="checkbox" name="rails"><label for="rails">Bicycle Rails</label></li>
+      <li><input type="checkbox" name="corral"><label for="corral">Bin Corrals</label></li>
+      <li><input type="checkbox" name="equip"><label for="equip">Recreation Equipment Item</label></li>
+      <li><input type="checkbox" name="bbq"><label for="bbq">Barbeque</label></li>
     </ul>
   </form>
 </div>
