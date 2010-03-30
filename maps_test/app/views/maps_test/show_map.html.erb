@@ -22,140 +22,71 @@
               marker.openInfoWindowHtml(html);
             });
             return marker;
+        };
+
+        function toggleMarkers(event) {
+            if (this.checked) {
+                markers = event.data.list;
+                mgr = event.data.manager;
+                var i = markers.length;
+                while (i--) {
+                    mgr.addMarker(markers[i], 0);
+                }
+                mgr.refresh();
+            } else {
+                event.data.manager.clearMarkers();
+            }
+        };
+
+
+        function setupCategory(map, data, minZoom) {
+            var mgr = new MarkerManager(map);
+            var list = [];
+
+            var i = data.length;
+            while (i--) {
+              var item = data[i];
+              var point = new GLatLng(item.latitude, item.longitude);
+              var marker = createMarker(point,'<h4>' + item.category + '</h4>');
+              list.push(marker);
+              mgr.addMarker(marker, minZoom);
+            }
+            mgr.refresh();
+            return { manager: mgr, list: list };
         }
+
 
         function initialize() {
             var map = new GMap2(document.getElementById("map"));
             map.setCenter(new GLatLng(-37.8062649904, 144.96165842), 10);
             map.setUIToDefault();
 
-            var horseTroughMgr = new MarkerManager(map);
-            var horseTroughMarkers = [];
-            var i = Horse_Trough.length;
-            while (i--) {
-              var trough = Horse_Trough[i];
-              var point = new GLatLng(trough.latitude, trough.longitude);
-              var marker = createMarker(point,'<h4>' + trough.category + '</h4>');
-              horseTroughMarkers.push(marker);
-              horseTroughMgr.addMarker(marker, 0);
-            }
-            horseTroughMgr.refresh();
-
-            var litterBinMgr = new MarkerManager(map);
-            var i = Litter_Bin.length;
-            while (i--) {
-              var bin = Litter_Bin[i];
-              var point = new GLatLng(bin.latitude, bin.longitude);
-              var marker = createMarker(point,'<h4>' + bin.category + '</h4>');
-              litterBinMgr.addMarker(marker, 19);
-            }
-            litterBinMgr.refresh();
-
-            var hoopMgr = new MarkerManager(map);
-            var i = Hoop.length;
-            while (i--) {
-              var hoop = Hoop[i];
-              var point = new GLatLng(hoop.latitude, hoop.longitude);
-              var marker = createMarker(point,'<h4>' + hoop.category + '</h4>');
-              hoopMgr.addMarker(marker, 15);
-            }
-            hoopMgr.refresh();
-
-            var informationPillarMgr = new MarkerManager(map);
-            var i = Information_Pillar.length;
-            while (i--) {
-              var info = Information_Pillar[i];
-              var point = new GLatLng(info.latitude, info.longitude);
-              var marker = createMarker(point,'<h4>' + info.category + '</h4>');
-              informationPillarMgr.addMarker(marker, 0);
-            }
-            informationPillarMgr.refresh();
-
-            var seatMgr = new MarkerManager(map);
-            var i = Seat.length;
-            while (i--) {
-              var seat = Seat[i];
-              var point = new GLatLng(seat.latitude, seat.longitude);
-              var marker = createMarker(point,'<h4>' + seat.category + '</h4>');
-              seatMgr.addMarker(marker, 19);
-            }
-            seatMgr.refresh();
-
-            var drinkingFountainMgr = new MarkerManager(map);
-            var i = Drinking_Fountain.length;
-            while (i--) {
-              var drink = Drinking_Fountain[i];
-              var point = new GLatLng(drink.latitude, drink.longitude);
-              var marker = createMarker(point,'<h4>' + drink.category + '</h4>');
-              drinkingFountainMgr.addMarker(marker, 15);
-            }
-            drinkingFountainMgr.refresh();
-
-            var picnicSettingMgr = new MarkerManager(map);
-            var i = Picnic_Setting.length;
-            while (i--) {
-              var picnic = Picnic_Setting[i];
-              var point = new GLatLng(picnic.latitude, picnic.longitude);
-              var marker = createMarker(point,'<h4>' + picnic.category + '</h4>');
-              picnicSettingMgr.addMarker(marker, 14);
-            }
-            picnicSettingMgr.refresh();
-
-            var bicycleRailMgr = new MarkerManager(map);
-            var i = Bicycle_Rails.length;
-            while (i--) {
-              var rails = Bicycle_Rails[i];
-              var point = new GLatLng(rails.latitude, rails.longitude);
-              var marker = createMarker(point,'<h4>' + rails.category + '</h4>');
-              bicycleRailMgr.addMarker(marker, 17);
-            }
-            bicycleRailMgr.refresh();
-
-            var binCorralMgr = new MarkerManager(map);
-            var i = Bin_Corral.length;
-            while (i--) {
-              var corral = Bin_Corral[i];
-              var point = new GLatLng(corral.latitude, corral.longitude);
-              var marker = createMarker(point,'<h4>' + corral.category + '</h4>');
-              binCorralMgr.addMarker(marker, 14);
-            }
-            binCorralMgr.refresh();
-
-            var recreationEquipmentItemMgr = new MarkerManager(map);
-            var i = Recreation_Equipment_Item.length;
-            while (i--) {
-              var equipment = Recreation_Equipment_Item[i];
-              var point = new GLatLng(equipment.latitude, equipment.longitude);
-              var marker = createMarker(point,'<h4>' + equipment.category + '</h4>');
-              recreationEquipmentItemMgr.addMarker(marker, 12);
-            }
-            recreationEquipmentItemMgr.refresh();
-
-            var barbequeMgr = new MarkerManager(map);
-            var i = Barbeque.length;
-            while (i--) {
-              var bbq = Barbeque[i];
-              var point = new GLatLng(bbq.latitude, bbq.longitude);
-              var marker = createMarker(point,'<h4>' + bbq.category + '</h4>');
-              barbequeMgr.addMarker(marker, 14);
-            }
-            barbequeMgr.refresh();
+            var trough = setupCategory(map, Horse_Trough, 0);
+            var bin = setupCategory(map, Litter_Bin, 19);
+            var hoop = setupCategory(map, Hoop, 15);
+            var info = setupCategory(map, Information_Pillar, 0);
+            var seat = setupCategory(map, Seat, 19);
+            var drink = setupCategory(map, Drinking_Fountain, 15);
+            var picnic = setupCategory(map, Picnic_Setting, 14);
+            var rails = setupCategory(map, Bicycle_Rails, 14);
+            var corral = setupCategory(map, Bin_Corral, 14);
+            var equip = setupCategory(map, Recreation_Equipment_Item, 12);
+            var bbq = setupCategory(map, Barbeque, 14);
 
 
-            $("#category_list input[name='trough']").bind("change", {manager: horseTroughMgr, list: horseTroughMarkers}, function(event) {
-                if (this.checked) {
-                    markers = event.data.list;
-                    mgr = event.data.manager;
-                    var i = markers.length;
-                    while (i--) {
-                        mgr.addMarker(markers[i], 0);    
-                    }
-                    mgr.refresh();
-                } else {
-                    event.data.manager.clearMarkers();
-                }
-            })
-        }
+            $("#category_list input[name='trough']").bind("change", trough, toggleMarkers);
+            $("#category_list input[name='bin']").bind("change", bin, toggleMarkers);
+            $("#category_list input[name='hoop']").bind("change", hoop, toggleMarkers);
+            $("#category_list input[name='info']").bind("change", info, toggleMarkers);
+            $("#category_list input[name='seat']").bind("change", seat, toggleMarkers);
+            $("#category_list input[name='drink']").bind("change", drink, toggleMarkers);
+            $("#category_list input[name='picnic']").bind("change", picnic, toggleMarkers);
+            $("#category_list input[name='rails']").bind("change", rails, toggleMarkers);
+            $("#category_list input[name='corral']").bind("change", corral, toggleMarkers);
+            $("#category_list input[name='equip']").bind("change", equip, toggleMarkers);
+            $("#category_list input[name='bbq']").bind("change", bbq, toggleMarkers);
+
+        };
 
         $(initialize);
     </script>
@@ -168,17 +99,17 @@ Here's the map:
 <div id="categories">
   <form name="category_toggles">
     <ul id="category_list">
-      <li><input type="checkbox" name="trough"><label for="trough">Horse Troughs</label></li>
-      <li><input type="checkbox" name="bin"><label for="bin">Rubbish Bins</label></li>
-      <li><input type="checkbox" name="hoop"><label for="hoop">Hoops</label></li>
-      <li><input type="checkbox" name="info"><label for="info">Information Pillars</label></li>
-      <li><input type="checkbox" name="seat"><label for="seat">Seats</label></li>
-      <li><input type="checkbox" name="drink"><label for="drink">Drinking Fountains</label></li>
-      <li><input type="checkbox" name="picnic"><label for="picnic">Picnic Settings</label></li>
-      <li><input type="checkbox" name="rails"><label for="rails">Bicycle Rails</label></li>
-      <li><input type="checkbox" name="corral"><label for="corral">Bin Corrals</label></li>
-      <li><input type="checkbox" name="equip"><label for="equip">Recreation Equipment Item</label></li>
-      <li><input type="checkbox" name="bbq"><label for="bbq">Barbeque</label></li>
+      <li><input type="checkbox" name="trough" checked="true"><label for="trough">Horse Troughs</label></li>
+      <li><input type="checkbox" name="bin" checked="true"><label for="bin">Rubbish Bins</label></li>
+      <li><input type="checkbox" name="hoop" checked="true"><label for="hoop">Hoops</label></li>
+      <li><input type="checkbox" name="info" checked="true"><label for="info">Information Pillars</label></li>
+      <li><input type="checkbox" name="seat" checked="true"><label for="seat">Seats</label></li>
+      <li><input type="checkbox" name="drink" checked="true"><label for="drink">Drinking Fountains</label></li>
+      <li><input type="checkbox" name="picnic" checked="true"><label for="picnic">Picnic Settings</label></li>
+      <li><input type="checkbox" name="rails" checked="true"><label for="rails">Bicycle Rails</label></li>
+      <li><input type="checkbox" name="corral" checked="true"><label for="corral">Bin Corrals</label></li>
+      <li><input type="checkbox" name="equip" checked="true"><label for="equip">Recreation Equipment Item</label></li>
+      <li><input type="checkbox" name="bbq" checked="true"><label for="bbq">Barbeque</label></li>
     </ul>
   </form>
 </div>
