@@ -9,7 +9,7 @@ Copyright (c) 2010 David Cameron. All rights reserved.
 
 from pyproj import Proj,transform
 
-utm = Proj(proj="utm",ellps="aust_SA",zone="55",south=True)
+utm = Proj(proj="utm",ellps="WGS84",zone="55",south=True)
 
 def ENtoLL84(easting,northing):
   # Returns (lat,long) tuple
