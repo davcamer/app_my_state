@@ -1,0 +1,5 @@
+--- 
+name: zoom change re-shows all categories
+id: 1a1a8f06-5a78-45d3-91e9-66e626424d8f
+detail: Seems to be an issue where MarkerManager calls "show()" again on all the points that qualify, rather than just doing add/removes.
+status: ready for dev
