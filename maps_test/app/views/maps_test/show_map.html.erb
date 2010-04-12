@@ -33,7 +33,6 @@
             }
         };
 
-
         function setupCategory(map, data, minZoom) {
             var mgr = new MarkerManager(map);
 
@@ -47,6 +46,23 @@
             return { mgr: mgr };
         }
 
+        var geocoder = new GClientGeocoder();
+        function showAddress(event) {
+          alert("This is in the showAddress method!");
+          var map = event.data.map;
+          var address = event.data.input.val();
+          alert("the value of address is " + address);
+          geocoder.getLatLng(
+            address,
+            function(point) {
+              if (!point) {
+                alert(address + " not found");
+              } else {
+                map.setCenter(point, 13);
+              }
+            }
+          );
+        }
 
         function initialize() {
             var map = new GMap2(document.getElementById("map"));
@@ -81,7 +97,10 @@
             $("#category_list input[name='equip']").bind("change", equip, toggleMarkers);
             $("#category_list input[name='bbq']").bind("change", bbq, toggleMarkers);
 
+            var address_input = $("#address_form input[name='address']");
+            $("#address_form input[name='address_submit']").bind("click", {map: map, input: address_input}, showAddress);
         };
+
 
         $(initialize);
     </script>
@@ -109,7 +128,10 @@ Here's the map:
   </form>
 </div>
 <div id="map"></div>
-
+<div id="address_form">
+  <input type="text" name="address">
+  <input type="submit" name="address_submit">
+</div>
 </div>
 </body>
 </html>
