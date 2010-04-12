@@ -47,11 +47,13 @@
         }
 
         var geocoder = new GClientGeocoder();
+        geocoder.setBaseCountryCode("au");
+        var northeast_limit = new GLatLng(-37.80,145.0);
+        var southwest_limit = new GLatLng(-37.85,144.9);
+        geocoder.setViewport(new GLatLngBounds(southwest_limit, northeast_limit));
         function showAddress(event) {
-          alert("This is in the showAddress method!");
           var map = event.data.map;
           var address = event.data.input.val();
-          alert("the value of address is " + address);
           geocoder.getLatLng(
             address,
             function(point) {
