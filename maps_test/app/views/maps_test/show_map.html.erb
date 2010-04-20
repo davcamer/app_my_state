@@ -71,8 +71,6 @@
             map.setCenter(new GLatLng(-37.8062649904, 144.96165842), 10);
             map.setUIToDefault();
 
-            var mgr = new MarkerManager(map);
-
             var trough = setupCategory(map, Horse_Trough, 0);
             var bin = setupCategory(map, Litter_Bin, 19);
             var hoop = setupCategory(map, Hoop, 15);
@@ -84,8 +82,6 @@
             var corral = setupCategory(map, Bin_Corral, 14);
             var equip = setupCategory(map, Recreation_Equipment_Item, 12);
             var bbq = setupCategory(map, Barbeque, 14);
-
-            mgr.refresh();
 
             $("#category_list input[name='trough']").bind("change", trough, toggleMarkers);
             $("#category_list input[name='bin']").bind("change", bin, toggleMarkers);
@@ -115,23 +111,24 @@ Here's the map:
 <div id="categories">
   <form name="category_toggles">
     <ul id="category_list">
-      <li><input type="checkbox" name="trough" checked="true"><label for="trough">Horse Troughs</label></li>
-      <li><input type="checkbox" name="bin" checked="true"><label for="bin">Rubbish Bins</label></li>
-      <li><input type="checkbox" name="hoop" checked="true"><label for="hoop">Hoops</label></li>
-      <li><input type="checkbox" name="info" checked="true"><label for="info">Information Pillars</label></li>
-      <li><input type="checkbox" name="seat" checked="true"><label for="seat">Seats</label></li>
-      <li><input type="checkbox" name="drink" checked="true"><label for="drink">Drinking Fountains</label></li>
-      <li><input type="checkbox" name="picnic" checked="true"><label for="picnic">Picnic Settings</label></li>
-      <li><input type="checkbox" name="rails" checked="true"><label for="rails">Bicycle Rails</label></li>
-      <li><input type="checkbox" name="corral" checked="true"><label for="corral">Bin Corrals</label></li>
-      <li><input type="checkbox" name="equip" checked="true"><label for="equip">Recreation Equipment Item</label></li>
-      <li><input type="checkbox" name="bbq" checked="true"><label for="bbq">Barbeque</label></li>
+      <li><input type="checkbox" name="trough" id="trough" checked="true"><label for="trough">Horse Troughs</label></li>
+      <li><input type="checkbox" name="bin" id="bin" checked="true"><label for="bin">Rubbish Bins</label></li>
+      <li><input type="checkbox" name="hoop" id="hoop" checked="true"><label for="hoop">Hoops</label></li>
+      <li><input type="checkbox" name="info" id="info" checked="true"><label for="info">Information Pillars</label></li>
+      <li><input type="checkbox" name="seat" id="seat" checked="true"><label for="seat">Seats</label></li>
+      <li><input type="checkbox" name="drink" id="drink" checked="true"><label for="drink">Drinking Fountains</label></li>
+      <li><input type="checkbox" name="picnic" id="picnic" checked="true"><label for="picnic">Picnic Settings</label></li>
+      <li><input type="checkbox" name="rails" id="rails" checked="true"><label for="rails">Bicycle Rails</label></li>
+      <li><input type="checkbox" name="corral" id="corral" checked="true"><label for="corral">Bin Corrals</label></li>
+      <li><input type="checkbox" name="equip" id="equip" checked="true"><label for="equip">Recreation Equipment Item</label></li>
+      <li><input type="checkbox" name="bbq" id="bbq" checked="true"><label for="bbq">Barbeque</label></li>
     </ul>
   </form>
 </div>
 <div id="map"></div>
 <div id="address_form">
-  <input type="text" name="address">
+  <label for="address">Centre on address: </label>
+  <input type="text" name="address" id="address">
   <input type="submit" name="address_submit">
 </div>
 </div>
