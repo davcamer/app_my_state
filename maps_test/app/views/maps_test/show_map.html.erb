@@ -10,78 +10,84 @@
     #category_list li {list-style-type: none; margin: 5px;}
   </style>
   
-    <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAqWWYRzzIpnWhU1fLcO47mRTJQa0g3IQ9GZqIMmInSLzwtGDKaBSIS5bxhaXo0xdAaGYI6fOtXZbxww" type="text/javascript"></script>
-    <script src="/javascripts/markermanager.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="/javascripts/markermanager_packed.js"></script>
     <script src="/javascripts/data.js"></script>
     <script src="/javascripts/jquery-1.4.2.js"></script>
 
     <script type="text/javascript">
-        function createMarker(point,html) {
-            var marker = new GMarker(point);
-            GEvent.addListener(marker, "click", function() {
-              marker.openInfoWindowHtml(html);
+        function createMarker(map,point,iconUrl) {
+            return new google.maps.Marker({  
+                position: point,
+                icon: iconUrl
             });
-            return marker;
-        };
+        }
 
         function toggleMarkers(event) {
-            mgr = event.data.mgr;
+            mgr = event.data;
             if (this.checked) {
               mgr.show();
             } else {
               mgr.hide();
             }
-        };
+        }
 
-        function setupCategory(map, data, minZoom) {
-            var mgr = new MarkerManager(map);
-
+        function setupCategory(mgr, data, minZoom, iconUrl) {
             var i = data.length;
             while (i--) {
               var item = data[i];
-              var point = new GLatLng(item.latitude, item.longitude);
-              var marker = createMarker(point,'<h4>' + item.category + '</h4>');
+              var point = new google.maps.LatLng(item.latitude, item.longitude);
+              var marker = createMarker(map,point,iconUrl);
               mgr.addMarker(marker, minZoom);
             }
-            return { mgr: mgr };
         }
 
-        var geocoder = new GClientGeocoder();
-        geocoder.setBaseCountryCode("au");
-        var northeast_limit = new GLatLng(-37.80,145.0);
-        var southwest_limit = new GLatLng(-37.85,144.9);
-        geocoder.setViewport(new GLatLngBounds(southwest_limit, northeast_limit));
-        function showAddress(event) {
-          var map = event.data.map;
-          var address = event.data.input.val();
-          geocoder.getLatLng(
-            address,
-            function(point) {
-              if (!point) {
-                alert(address + " not found");
-              } else {
-                map.setCenter(point, 13);
-              }
-            }
-          );
+//        var geocoder = new GClientGeocoder();
+//        geocoder.setBaseCountryCode("au");
+//        var northeast_limit = new GLatLng(-37.80,145.0);
+//        var southwest_limit = new GLatLng(-37.85,144.9);
+//        geocoder.setViewport(new GLatLngBounds(southwest_limit, northeast_limit));
+//        function showAddress(event) {
+//          var map = event.data.map;
+//          var address = event.data.input.val();
+//          geocoder.getLatLng(
+//            address,
+//            function(point) {
+//              if (!point) {
+//                alert(address + " not found");
+//              } else {
+//                map.setCenter(point, 13);
+//              }
+//            }
+//          );
+//        }
+
+        function setupMap() {
+            var options = {
+                zoom: 10,
+                center: new google.maps.LatLng(-37.8062649904, 144.96165842),
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            };
+            var map = new google.maps.Map(document.getElementById("map"), options);
+
+            var listener = google.maps.event.addListener(map, 'bounds_changed', function(){
+                setupMarkers(map);
+                google.maps.event.removeListener(listner);
+            });
         }
 
-        function initialize() {
-            var map = new GMap2(document.getElementById("map"));
-            map.setCenter(new GLatLng(-37.8062649904, 144.96165842), 10);
-            map.setUIToDefault();
-
-            var trough = setupCategory(map, Horse_Trough, 0);
-            var bin = setupCategory(map, Litter_Bin, 19);
-            var hoop = setupCategory(map, Hoop, 15);
-            var info = setupCategory(map, Information_Pillar, 0);
-            var seat = setupCategory(map, Seat, 19);
-            var drink = setupCategory(map, Drinking_Fountain, 15);
-            var picnic = setupCategory(map, Picnic_Setting, 14);
-            var rails = setupCategory(map, Bicycle_Rails, 18);
-            var corral = setupCategory(map, Bin_Corral, 14);
-            var equip = setupCategory(map, Recreation_Equipment_Item, 12);
-            var bbq = setupCategory(map, Barbeque, 14);
+        function setupMarkers(map) {
+            var trough = new MarkerManager(map);
+            var bin = new MarkerManager(map);
+            var hoop = new MarkerManager(map);
+            var info = new MarkerManager(map);
+            var seat = new MarkerManager(map);
+            var drink = new MarkerManager(map);
+            var picnic = new MarkerManager(map);
+            var rails = new MarkerManager(map);
+            var corral = new MarkerManager(map);
+            var equip = new MarkerManager(map);
+            var bbq = new MarkerManager(map);
 
             $("#category_list input[name='trough']").bind("change", trough, toggleMarkers);
             $("#category_list input[name='bin']").bind("change", bin, toggleMarkers);
@@ -95,9 +101,69 @@
             $("#category_list input[name='equip']").bind("change", equip, toggleMarkers);
             $("#category_list input[name='bbq']").bind("change", bbq, toggleMarkers);
 
-            var address_input = $("#address_form input[name='address']");
-            $("#address_form input[name='address_submit']").bind("click", {map: map, input: address_input}, showAddress);
-        };
+            google.maps.event.addListener(trough, 'loaded', function(){
+                setupCategory(trough, Horse_Trough, 0,
+                    'http://google-maps-icons.googlecode.com/files/horseriding.png');
+                trough.refresh();
+            });
+            google.maps.event.addListener(bin, 'loaded', function(){
+                setupCategory(bin, Litter_Bin, 19,
+                    'http://google-maps-icons.googlecode.com/files/trash.png');
+                bin.refresh();
+            });
+            google.maps.event.addListener(hoop, 'loaded', function(){
+                setupCategory(hoop, Hoop, 15,
+                    'http://google-maps-icons.googlecode.com/files/bicycleparking.png');    
+                hoop.refresh();
+            });
+            google.maps.event.addListener(info, 'loaded', function(){
+                setupCategory(info, Information_Pillar, 0,
+                    'http://google-maps-icons.googlecode.com/files/info.png');
+                info.refresh();
+            });
+            google.maps.event.addListener(seat, 'loaded', function(){
+                setupCategory(seat, Seat, 19,
+                    'http://google-maps-icons.googlecode.com/files/bench.png');
+                seat.refresh();
+            });
+            google.maps.event.addListener(drink, 'loaded', function(){
+                setupCategory(drink, Drinking_Fountain, 15,
+                    'http://google-maps-icons.googlecode.com/files/drinkingfountain.png');
+                drink.refresh();
+            });
+            google.maps.event.addListener(picnic, 'loaded', function(){
+                setupCategory(picnic, Picnic_Setting, 14,
+                    'http://google-maps-icons.googlecode.com/files/picnic.png');
+                picnic.refresh();
+            });
+            google.maps.event.addListener(rails, 'loaded', function(){
+                setupCategory(rails, Bicycle_Rails, 18,
+                    'http://google-maps-icons.googlecode.com/files/bicycleparking.png');
+                rails.refresh();
+            });
+            google.maps.event.addListener(corral, 'loaded', function(){
+                setupCategory(corral, Bin_Corral, 14,
+                    'http://google-maps-icons.googlecode.com/files/trash.png');
+                corral.refresh();
+            });
+            google.maps.event.addListener(equip, 'loaded', function(){
+                setupCategory(equip, Recreation_Equipment_Item, 12,
+                    'http://google-maps-icons.googlecode.com/files/basketball.png');
+                equip.refresh();
+            });
+            google.maps.event.addListener(bbq, 'loaded', function(){
+                setupCategory(bbq, Barbeque, 14,
+                    'http://google-maps-icons.googlecode.com/files/restaurant-barbecue.png');
+                bbq.refresh();
+            });            
+        }
+
+        function initialize() {
+            setupMap();
+
+//            var address_input = $("#address_form input[name='address']");
+//            $("#address_form input[name='address_submit']").bind("click", {map: map, input: address_input}, showAddress);
+        }
 
 
         $(initialize);
