@@ -24,7 +24,7 @@
         }
 
         function toggleMarkers(event) {
-            mgr = event.data;
+            var mgr = event.data;
             if (this.checked) {
               mgr.show();
             } else {
@@ -70,9 +70,8 @@
             };
             var map = new google.maps.Map(document.getElementById("map"), options);
 
-            var listener = google.maps.event.addListener(map, 'bounds_changed', function(){
+            google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
                 setupMarkers(map);
-                google.maps.event.removeListener(listner);
             });
         }
 
@@ -101,57 +100,57 @@
             $("#category_list input[name='equip']").bind("change", equip, toggleMarkers);
             $("#category_list input[name='bbq']").bind("change", bbq, toggleMarkers);
 
-            google.maps.event.addListener(trough, 'loaded', function(){
+            google.maps.event.addListenerOnce(trough, 'loaded', function(){
                 setupCategory(trough, Horse_Trough, 0,
                     'http://google-maps-icons.googlecode.com/files/horseriding.png');
                 trough.refresh();
             });
-            google.maps.event.addListener(bin, 'loaded', function(){
+            google.maps.event.addListenerOnce(bin, 'loaded', function(){
                 setupCategory(bin, Litter_Bin, 19,
                     'http://google-maps-icons.googlecode.com/files/trash.png');
                 bin.refresh();
             });
-            google.maps.event.addListener(hoop, 'loaded', function(){
+            google.maps.event.addListenerOnce(hoop, 'loaded', function(){
                 setupCategory(hoop, Hoop, 15,
                     'http://google-maps-icons.googlecode.com/files/bicycleparking.png');    
                 hoop.refresh();
             });
-            google.maps.event.addListener(info, 'loaded', function(){
+            google.maps.event.addListenerOnce(info, 'loaded', function(){
                 setupCategory(info, Information_Pillar, 0,
                     'http://google-maps-icons.googlecode.com/files/info.png');
                 info.refresh();
             });
-            google.maps.event.addListener(seat, 'loaded', function(){
+            google.maps.event.addListenerOnce(seat, 'loaded', function(){
                 setupCategory(seat, Seat, 19,
                     'http://google-maps-icons.googlecode.com/files/bench.png');
                 seat.refresh();
             });
-            google.maps.event.addListener(drink, 'loaded', function(){
+            google.maps.event.addListenerOnce(drink, 'loaded', function(){
                 setupCategory(drink, Drinking_Fountain, 15,
                     'http://google-maps-icons.googlecode.com/files/drinkingfountain.png');
                 drink.refresh();
             });
-            google.maps.event.addListener(picnic, 'loaded', function(){
+            google.maps.event.addListenerOnce(picnic, 'loaded', function(){
                 setupCategory(picnic, Picnic_Setting, 14,
                     'http://google-maps-icons.googlecode.com/files/picnic.png');
                 picnic.refresh();
             });
-            google.maps.event.addListener(rails, 'loaded', function(){
+            google.maps.event.addListenerOnce(rails, 'loaded', function(){
                 setupCategory(rails, Bicycle_Rails, 18,
                     'http://google-maps-icons.googlecode.com/files/bicycleparking.png');
                 rails.refresh();
             });
-            google.maps.event.addListener(corral, 'loaded', function(){
+            google.maps.event.addListenerOnce(corral, 'loaded', function(){
                 setupCategory(corral, Bin_Corral, 14,
                     'http://google-maps-icons.googlecode.com/files/trash.png');
                 corral.refresh();
             });
-            google.maps.event.addListener(equip, 'loaded', function(){
+            google.maps.event.addListenerOnce(equip, 'loaded', function(){
                 setupCategory(equip, Recreation_Equipment_Item, 12,
                     'http://google-maps-icons.googlecode.com/files/basketball.png');
                 equip.refresh();
             });
-            google.maps.event.addListener(bbq, 'loaded', function(){
+            google.maps.event.addListenerOnce(bbq, 'loaded', function(){
                 setupCategory(bbq, Barbeque, 14,
                     'http://google-maps-icons.googlecode.com/files/restaurant-barbecue.png');
                 bbq.refresh();
@@ -162,7 +161,8 @@
             setupMap();
 
 //            var address_input = $("#address_form input[name='address']");
-//            $("#address_form input[name='address_submit']").bind("click", {map: map, input: address_input}, showAddress);
+//            $("#address_form input[name='address_submit']")
+//                    .bind("click", {map: map, input: address_input}, showAddress);
         }
 
 
@@ -177,17 +177,17 @@ Here's the map:
 <div id="categories">
   <form name="category_toggles">
     <ul id="category_list">
-      <li><input type="checkbox" name="trough" id="trough" checked="true"><label for="trough">Horse Troughs</label></li>
-      <li><input type="checkbox" name="bin" id="bin" checked="true"><label for="bin">Rubbish Bins</label></li>
-      <li><input type="checkbox" name="hoop" id="hoop" checked="true"><label for="hoop">Hoops</label></li>
-      <li><input type="checkbox" name="info" id="info" checked="true"><label for="info">Information Pillars</label></li>
-      <li><input type="checkbox" name="seat" id="seat" checked="true"><label for="seat">Seats</label></li>
-      <li><input type="checkbox" name="drink" id="drink" checked="true"><label for="drink">Drinking Fountains</label></li>
-      <li><input type="checkbox" name="picnic" id="picnic" checked="true"><label for="picnic">Picnic Settings</label></li>
-      <li><input type="checkbox" name="rails" id="rails" checked="true"><label for="rails">Bicycle Rails</label></li>
-      <li><input type="checkbox" name="corral" id="corral" checked="true"><label for="corral">Bin Corrals</label></li>
-      <li><input type="checkbox" name="equip" id="equip" checked="true"><label for="equip">Recreation Equipment Item</label></li>
-      <li><input type="checkbox" name="bbq" id="bbq" checked="true"><label for="bbq">Barbeque</label></li>
+      <li><label><input type="checkbox" name="trough" checked="true">Horse Troughs</label></li>
+      <li><label><input type="checkbox" name="bin" checked="true">Rubbish Bins</label></li>
+      <li><label><input type="checkbox" name="hoop" checked="true">Hoops</label></li>
+      <li><label><input type="checkbox" name="info" checked="true">Information Pillars</label></li>
+      <li><label><input type="checkbox" name="seat" checked="true">Seats</label></li>
+      <li><label><input type="checkbox" name="drink" checked="true">Drinking Fountains</label></li>
+      <li><label><input type="checkbox" name="picnic" checked="true">Picnic Settings</label></li>
+      <li><label><input type="checkbox" name="rails" checked="true">Bicycle Rails</label></li>
+      <li><label><input type="checkbox" name="corral" checked="true">Bin Corrals</label></li>
+      <li><label><input type="checkbox" name="equip" checked="true">Recreation Equipment Item</label></li>
+      <li><label><input type="checkbox" name="bbq" checked="true">Barbeque</label></li>
     </ul>
   </form>
 </div>
