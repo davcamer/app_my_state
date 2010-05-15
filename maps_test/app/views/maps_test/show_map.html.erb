@@ -12,6 +12,7 @@
   
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script src="/javascripts/markermanager_packed.js"></script>
+    <script src="/javascripts/markerclusterer_packed.js"></script>
     <script src="/javascripts/data.js"></script>
     <script src="/javascripts/jquery-1.4.2.js"></script>
 
@@ -64,7 +65,7 @@
 
         function setupMap() {
             var options = {
-                zoom: 10,
+                zoom: 14,
                 center: new google.maps.LatLng(-37.8062649904, 144.96165842),
                 mapTypeId: google.maps.MapTypeId.HYBRID
             };
@@ -75,86 +76,30 @@
             });
         }
 
+        function createMarkerList(data, iconUrl, map) {
+            var markers = new Array();
+            var i = data.length;
+            while (i--) {
+              var item = data[i];
+              var point = new google.maps.LatLng(item.latitude, item.longitude);
+              var marker = createMarker(map,point,iconUrl);
+              markers.push(marker);
+            }
+            return markers;
+        }
+
         function setupMarkers(map) {
-            var trough = new MarkerManager(map);
-            var bin = new MarkerManager(map);
-            var hoop = new MarkerManager(map);
-            var info = new MarkerManager(map);
-            var seat = new MarkerManager(map);
-            var drink = new MarkerManager(map);
-            var picnic = new MarkerManager(map);
-            var rails = new MarkerManager(map);
-            var corral = new MarkerManager(map);
-            var equip = new MarkerManager(map);
-            var bbq = new MarkerManager(map);
+            var trough = new MarkerClusterer(map, createMarkerList(Horse_Trough, 'http://google-maps-icons.googlecode.com/files/horseriding.png', map, {zoomOnClick: true}));
+            var bin = new MarkerClusterer(map, createMarkerList(Litter_Bin, 'http://google-maps-icons.googlecode.com/files/trash.png', map, {zoomOnClick: true}));
+            var info = new MarkerClusterer(map, createMarkerList(Information_Pillar, 'http://google-maps-icons.googlecode.com/files/info.png', map, {zoomOnClick: true}));
+            var seat = new MarkerClusterer(map, createMarkerList(Seat, 'http://google-maps-icons.googlecode.com/files/bench.png', map, {zoomOnClick: true}));
+            var drink = new MarkerClusterer(map, createMarkerList(Drinking_Fountain, 'http://google-maps-icons.googlecode.com/files/drinkingfountain.png', map, {zoomOnClick: true}));
+            var picnic = new MarkerClusterer(map, createMarkerList(Picnic_Setting, 'http://google-maps-icons.googlecode.com/files/picnic.png', map, {zoomOnClick: true}));
+            var rails = new MarkerClusterer(map, createMarkerList(Bicycle_Rails.concat(Hoop), 'http://google-maps-icons.googlecode.com/files/bicycleparking.png', map, {zoomOnClick: true}));
+            var corral = new MarkerClusterer(map, createMarkerList(Bin_Corral, 'http://google-maps-icons.googlecode.com/files/trash.png', map, {zoomOnClick: true}));
+            var equip = new MarkerClusterer(map, createMarkerList(Recreation_Equipment_Item, 'http://google-maps-icons.googlecode.com/files/basketball.png', map, {zoomOnClick: true}));
+            var bbq = new MarkerClusterer(map, createMarkerList(Barbeque, 'http://google-maps-icons.googlecode.com/files/restaurant-barbecue.png', map, {zoomOnClick: true}));
 
-            $("#category_list input[name='trough']").bind("change", trough, toggleMarkers);
-            $("#category_list input[name='bin']").bind("change", bin, toggleMarkers);
-            $("#category_list input[name='hoop']").bind("change", hoop, toggleMarkers);
-            $("#category_list input[name='info']").bind("change", info, toggleMarkers);
-            $("#category_list input[name='seat']").bind("change", seat, toggleMarkers);
-            $("#category_list input[name='drink']").bind("change", drink, toggleMarkers);
-            $("#category_list input[name='picnic']").bind("change", picnic, toggleMarkers);
-            $("#category_list input[name='rails']").bind("change", rails, toggleMarkers);
-            $("#category_list input[name='corral']").bind("change", corral, toggleMarkers);
-            $("#category_list input[name='equip']").bind("change", equip, toggleMarkers);
-            $("#category_list input[name='bbq']").bind("change", bbq, toggleMarkers);
-
-            google.maps.event.addListenerOnce(trough, 'loaded', function(){
-                setupCategory(trough, Horse_Trough, 0,
-                    'http://google-maps-icons.googlecode.com/files/horseriding.png');
-                trough.refresh();
-            });
-            google.maps.event.addListenerOnce(bin, 'loaded', function(){
-                setupCategory(bin, Litter_Bin, 19,
-                    'http://google-maps-icons.googlecode.com/files/trash.png');
-                bin.refresh();
-            });
-            google.maps.event.addListenerOnce(hoop, 'loaded', function(){
-                setupCategory(hoop, Hoop, 15,
-                    'http://google-maps-icons.googlecode.com/files/bicycleparking.png');    
-                hoop.refresh();
-            });
-            google.maps.event.addListenerOnce(info, 'loaded', function(){
-                setupCategory(info, Information_Pillar, 0,
-                    'http://google-maps-icons.googlecode.com/files/info.png');
-                info.refresh();
-            });
-            google.maps.event.addListenerOnce(seat, 'loaded', function(){
-                setupCategory(seat, Seat, 19,
-                    'http://google-maps-icons.googlecode.com/files/bench.png');
-                seat.refresh();
-            });
-            google.maps.event.addListenerOnce(drink, 'loaded', function(){
-                setupCategory(drink, Drinking_Fountain, 15,
-                    'http://google-maps-icons.googlecode.com/files/drinkingfountain.png');
-                drink.refresh();
-            });
-            google.maps.event.addListenerOnce(picnic, 'loaded', function(){
-                setupCategory(picnic, Picnic_Setting, 14,
-                    'http://google-maps-icons.googlecode.com/files/picnic.png');
-                picnic.refresh();
-            });
-            google.maps.event.addListenerOnce(rails, 'loaded', function(){
-                setupCategory(rails, Bicycle_Rails, 18,
-                    'http://google-maps-icons.googlecode.com/files/bicycleparking.png');
-                rails.refresh();
-            });
-            google.maps.event.addListenerOnce(corral, 'loaded', function(){
-                setupCategory(corral, Bin_Corral, 14,
-                    'http://google-maps-icons.googlecode.com/files/trash.png');
-                corral.refresh();
-            });
-            google.maps.event.addListenerOnce(equip, 'loaded', function(){
-                setupCategory(equip, Recreation_Equipment_Item, 12,
-                    'http://google-maps-icons.googlecode.com/files/basketball.png');
-                equip.refresh();
-            });
-            google.maps.event.addListenerOnce(bbq, 'loaded', function(){
-                setupCategory(bbq, Barbeque, 14,
-                    'http://google-maps-icons.googlecode.com/files/restaurant-barbecue.png');
-                bbq.refresh();
-            });            
         }
 
         function initialize() {
@@ -179,12 +124,11 @@ Here's the map:
     <ul id="category_list">
       <li><label><input type="checkbox" name="trough" checked="true">Horse Troughs</label></li>
       <li><label><input type="checkbox" name="bin" checked="true">Rubbish Bins</label></li>
-      <li><label><input type="checkbox" name="hoop" checked="true">Hoops</label></li>
       <li><label><input type="checkbox" name="info" checked="true">Information Pillars</label></li>
       <li><label><input type="checkbox" name="seat" checked="true">Seats</label></li>
       <li><label><input type="checkbox" name="drink" checked="true">Drinking Fountains</label></li>
       <li><label><input type="checkbox" name="picnic" checked="true">Picnic Settings</label></li>
-      <li><label><input type="checkbox" name="rails" checked="true">Bicycle Rails</label></li>
+      <li><label><input type="checkbox" name="rails" checked="true">Bicycle Parking</label></li>
       <li><label><input type="checkbox" name="corral" checked="true">Bin Corrals</label></li>
       <li><label><input type="checkbox" name="equip" checked="true">Recreation Equipment Item</label></li>
       <li><label><input type="checkbox" name="bbq" checked="true">Barbeque</label></li>
