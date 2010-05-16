@@ -87,8 +87,8 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   // Add the map event listeners
   var that = this;
   google.maps.event.addListener(this.map_, 'zoom_changed', function() {
-    if (this.prevZoom_ != that.map_.getZoom()) {
-      this.prevZoom_ = that.map_.getZoom();
+    if (that.prevZoom_ != that.map_.getZoom()) {
+      that.prevZoom_ = that.map_.getZoom();
       that.resetViewport();
     }
   });
@@ -512,7 +512,7 @@ MarkerClusterer.prototype.clearMarkers = function() {
 
 
 /**
- * Clears all existing clusters and recreates them.
+ * Clears all existing clusters.
  */
 MarkerClusterer.prototype.resetViewport = function() {
   // Remove all the clusters

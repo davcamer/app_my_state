@@ -87,19 +87,30 @@
             return markers;
         }
 
-        function setupMarkers(map) {
-            var style = { url: 'http://google-maps-icons.googlecode.com/files/speed130.png' };
+        function buildOptions(imageUrl) {
+            var style = [
+                { url: imageUrl, width:32, height: 37 },
+                { url: imageUrl, width:32, height: 37 },
+                { url: imageUrl, width:32, height: 37 }
+            ];
+            return {
+                maxZoom: 17
+//                styles: style
+            }
+        }
 
-            var trough = new MarkerClusterer(map, createMarkerList(Horse_Trough, 'http://google-maps-icons.googlecode.com/files/horseriding.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var bin = new MarkerClusterer(map, createMarkerList(Litter_Bin, 'http://google-maps-icons.googlecode.com/files/trash.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var info = new MarkerClusterer(map, createMarkerList(Information_Pillar, 'http://google-maps-icons.googlecode.com/files/info.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var seat = new MarkerClusterer(map, createMarkerList(Seat, 'http://google-maps-icons.googlecode.com/files/bench.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var drink = new MarkerClusterer(map, createMarkerList(Drinking_Fountain, 'http://google-maps-icons.googlecode.com/files/drinkingfountain.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var picnic = new MarkerClusterer(map, createMarkerList(Picnic_Setting, 'http://google-maps-icons.googlecode.com/files/picnic.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var rails = new MarkerClusterer(map, createMarkerList(Bicycle_Rails.concat(Hoop), 'http://google-maps-icons.googlecode.com/files/bicycleparking.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var corral = new MarkerClusterer(map, createMarkerList(Bin_Corral, 'http://google-maps-icons.googlecode.com/files/trash.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var equip = new MarkerClusterer(map, createMarkerList(Recreation_Equipment_Item, 'http://google-maps-icons.googlecode.com/files/basketball.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
-            var bbq = new MarkerClusterer(map, createMarkerList(Barbeque, 'http://google-maps-icons.googlecode.com/files/restaurant-barbecue.png', map), {'zoomOnClick': true, 'maxZoom': 18 });
+        function setupMarkers(map) {
+
+            var trough = new MarkerClusterer(map, createMarkerList(Horse_Trough, 'http://google-maps-icons.googlecode.com/files/horseriding.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+            var bin = new MarkerClusterer(map, createMarkerList(Litter_Bin, 'http://google-maps-icons.googlecode.com/files/trash.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var info = new MarkerClusterer(map, createMarkerList(Information_Pillar, 'http://google-maps-icons.googlecode.com/files/info.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var seat = new MarkerClusterer(map, createMarkerList(Seat, 'http://google-maps-icons.googlecode.com/files/bench.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var drink = new MarkerClusterer(map, createMarkerList(Drinking_Fountain, 'http://google-maps-icons.googlecode.com/files/drinkingfountain.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var picnic = new MarkerClusterer(map, createMarkerList(Picnic_Setting, 'http://google-maps-icons.googlecode.com/files/picnic.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var rails = new MarkerClusterer(map, createMarkerList(Bicycle_Rails.concat(Hoop), 'http://google-maps-icons.googlecode.com/files/bicycleparking.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var corral = new MarkerClusterer(map, createMarkerList(Bin_Corral, 'http://google-maps-icons.googlecode.com/files/trash.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var equip = new MarkerClusterer(map, createMarkerList(Recreation_Equipment_Item, 'http://google-maps-icons.googlecode.com/files/basketball.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
+//            var bbq = new MarkerClusterer(map, createMarkerList(Barbeque, 'http://google-maps-icons.googlecode.com/files/restaurant-barbecue.png', map), buildOptions('http://google-maps-icons.googlecode.com/files/speed130.png'));
 
         }
 
