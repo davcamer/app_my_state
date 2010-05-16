@@ -42,25 +42,22 @@
             }
         }
 
-//        var geocoder = new GClientGeocoder();
-//        geocoder.setBaseCountryCode("au");
-//        var northeast_limit = new GLatLng(-37.80,145.0);
-//        var southwest_limit = new GLatLng(-37.85,144.9);
-//        geocoder.setViewport(new GLatLngBounds(southwest_limit, northeast_limit));
-//        function showAddress(event) {
-//          var map = event.data.map;
-//          var address = event.data.input.val();
-//          geocoder.getLatLng(
-//            address,
-//            function(point) {
-//              if (!point) {
-//                alert(address + " not found");
-//              } else {
-//                map.setCenter(point, 13);
-//              }
-//            }
-//          );
-//        }
+        var geocoder = new google.maps.Geocoder();
+        var northeast_limit = new google.maps.LatLng(-37.80,145.0);
+        var southwest_limit = new google.maps.LatLng(-37.85,144.9);
+        var search_bounds = new google.maps.LatLngBounds(southwest_limit, northeast_limit);
+        function showAddress(event) {
+          var address = event.data.input.val();
+
+          var request = { address: address, bounds: search_bounds, region: 'au' };
+          geocoder.geocode(request, function(results, status) {
+              if (status === google.maps.GeocoderStatus.OK) {
+                  event.data.map.setCenter(results[0].geometry.location);
+              } else {
+                  alert("Geocode was not successful for the following reason: " + status);
+              }
+          });
+        }
 
         function setupMap() {
             var options = {
@@ -73,6 +70,7 @@
             //google.maps.event.addListenerOnce(map, 'bounds_changed', function(){
                 setupMarkers(map);
             //});
+            return map;
         }
 
         function createMarkerList(data, iconUrl, map) {
@@ -115,11 +113,11 @@
         }
 
         function initialize() {
-            setupMap();
+            var map = setupMap();
 
-//            var address_input = $("#address_form input[name='address']");
-//            $("#address_form input[name='address_submit']")
-//                    .bind("click", {map: map, input: address_input}, showAddress);
+            var address_input = $("#address_form input[name='address']");
+            $("#address_form input[name='address_submit']")
+                    .bind("click", {map: map, input: address_input}, showAddress);
         }
 
 
@@ -130,7 +128,6 @@
 <body>
 <div id="container">
 Here's the map:
-<!-- This is the element in which the map will be displayed. -->
 <div id="categories">
   <form name="category_toggles">
     <ul id="category_list">
@@ -149,8 +146,8 @@ Here's the map:
 </div>
 <div id="map"></div>
 <div id="address_form">
-  <label for="address">Centre on address: </label>
-  <input type="text" name="address" id="address">
+  <label for="address">Centre on address:
+  <input type="text" name="address"></label>
   <input type="submit" name="address_submit">
 </div>
 </div>

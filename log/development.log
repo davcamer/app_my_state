@@ -1,0 +1,264 @@
+# Logfile created on Tue Apr 20 22:43:54 +1000 2010
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 22:44:07) [GET]
+Rendering maps_test/show_map
+Completed in 44ms (View: 35, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 22:51:03) [GET]
+Rendering maps_test/show_map
+Completed in 42ms (View: 5, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:16:42) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:23:47) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-20 23:23:47) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/markermanager_packed.js" with {:method=>:get}):
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  -e:1:in `load'
+  -e:1
+
+Rendering rescues/layout (not_found)
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:26:07) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-20 23:26:07) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/markermanager_packed.js" with {:method=>:get}):
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  -e:1:in `load'
+  -e:1
+
+Rendering rescues/layout (not_found)
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:26:56) [GET]
+Rendering maps_test/show_map
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-20 23:26:56) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/markermanager_packed.js" with {:method=>:get}):
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  -e:1:in `load'
+  -e:1
+
+Rendering rescues/layout (not_found)
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:27:09) [GET]
+Rendering maps_test/show_map
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-20 23:27:09) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/markermanager_packed.js" with {:method=>:get}):
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  -e:1:in `load'
+  -e:1
+
+Rendering rescues/layout (not_found)
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:35:31) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-20 23:35:32) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/markermanager_packed.js" with {:method=>:get}):
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  -e:1:in `load'
+  -e:1
+
+Rendering rescues/layout (not_found)
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:37:38) [GET]
+Rendering maps_test/show_map
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-04-20 23:37:38) [GET]
+
+ActionController::RoutingError (No route matches "/javascripts/markermanager_packed.js" with {:method=>:get}):
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  C:/Ruby/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  C:/Ruby/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  -e:1:in `load'
+  -e:1
+
+Rendering rescues/layout (not_found)
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:39:05) [GET]
+Rendering maps_test/show_map
+Completed in 2ms (View: 0, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:40:26) [GET]
+Rendering maps_test/show_map
+Completed in 6ms (View: 5, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:45:16) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-20 23:56:33) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 5, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-21 00:05:11) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-21 00:06:04) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-21 00:08:35) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-21 00:27:34) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:43:00) [GET]
+Rendering maps_test/show_map
+Completed in 51ms (View: 50, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:47:53) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:48:52) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:49:53) [GET]
+Rendering maps_test/show_map
+Completed in 2ms (View: 1, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:52:21) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:53:58) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:55:51) [GET]
+Rendering maps_test/show_map
+Completed in 23ms (View: 22, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 22:57:02) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 23:01:08) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 23:04:13) [GET]
+Rendering maps_test/show_map
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 23:05:01) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 7, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 23:13:22) [GET]
+Rendering maps_test/show_map
+Completed in 7ms (View: 6, DB: 0) | 200 OK [http://127.0.0.1/]
+
+
+Processing MapsTestController#show_map (for 127.0.0.1 at 2010-04-25 23:13:24) [GET]
+Rendering maps_test/show_map
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://127.0.0.1/]
