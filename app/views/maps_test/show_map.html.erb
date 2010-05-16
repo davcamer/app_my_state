@@ -8,6 +8,7 @@
     #category_list {border: 2px solid #000;}
     #category_list ul {list-style: none inside;}
     #category_list li {list-style-type: none; margin: 5px;}
+    .template {display: none;}
   </style>
   
     <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -16,11 +17,26 @@
     <script src="/javascripts/jquery-1.4.2.js"></script>
 
     <script type="text/javascript">
-        function createMarker(map,point,iconUrl) {
-            return new google.maps.Marker({  
+        function createMarker(map,item,iconUrl) {
+            var point = new google.maps.LatLng(item.latitude, item.longitude);
+            var marker = new google.maps.Marker({
                 position: point,
                 icon: iconUrl
             });
+            google.maps.event.addListener(marker, 'click', function() {
+                showInfoWindow(map, marker, item);
+            });
+            return marker; 
+        }
+
+        function showInfoWindow(map, marker, item) {
+            infoWindow.close();
+            var content = $('#content_template').clone().removeClass('template');
+            content.find('*[name=item_cat]').html(item.category);
+            content.find('*[name=item_lat]').html(item.latitude);
+            content.find('*[name=item_lng]').html(item.longitude);
+            infoWindow.setContent(content[0]);
+            infoWindow.open(map, marker);
         }
 
         function toggleMarkers(event) {
@@ -61,6 +77,9 @@
           return false;
         }
 
+        var infoWindow = new google.maps.InfoWindow();
+
+
         function setupMap() {
             var options = {
                 zoom: 14,
@@ -80,8 +99,7 @@
             var i = data.length;
             while (i--) {
               var item = data[i];
-              var point = new google.maps.LatLng(item.latitude, item.longitude);
-              var marker = createMarker(map,point,iconUrl);
+              var marker = createMarker(map,item,iconUrl);
               markers.push(marker);
             }
             return markers;
@@ -175,6 +193,11 @@ Here's the map:
     <input type="submit" name="address_submit">
   </form>
 </div>
+</div>
+<div id="content_template" class="template">
+  <div name="item_cat">template cat</div>
+  <div name="item_lat">template lat</div>
+  <div name="item_lng">template lng</div>
 </div>
 </body>
 </html>
