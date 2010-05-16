@@ -57,6 +57,8 @@
                   alert("Geocode was not successful for the following reason: " + status);
               }
           });
+          event.preventDefault();
+          return false;
         }
 
         function setupMap() {
@@ -167,9 +169,11 @@ Here's the map:
 </div>
 <div id="map"></div>
 <div id="address_form">
-  <label for="address">Centre on address:
-  <input type="text" name="address"></label>
-  <input type="submit" name="address_submit">
+  <form name="address_form">
+    <label for="address">Centre on address:
+    <input type="text" name="address"></label>
+    <input type="submit" name="address_submit">
+  </form>
 </div>
 </div>
 </body>
