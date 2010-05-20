@@ -3,6 +3,8 @@
 <title>Melbourne Street Furniture Warehouse</title>
 
 <style>
+    form { margin: 0px }
+
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
@@ -12,8 +14,6 @@
         height: 90%;
         margin-right: auto;
         margin-left: auto;
-        background: url(/images/SFW_bottom.png) bottom no-repeat;
-        background-color: #F0F0F0;
         margin-top: 40px;
     }
 
@@ -44,7 +44,6 @@
 
     #categories {
         float: right;
-        width: 240px;
         font-size: 80%;
     }
 
@@ -56,17 +55,19 @@
     }
 
     #category_list li {
-        padding: 2px 4px 2px 10px;
+        padding: 2px 4px 2px 4px;
     }
 
-    #search_box {
+    .category_subbox {
+        width: 240px;        
         background-color: #eaeaea;
         list-style: none;
-        padding: 0 5px 0 5px;
-        margin: 0;
+        padding: 7px;
+        margin: 14px;
+        border-radius: 7px;
     }
 
-    input.go_button {
+    input[name=address_submit] {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border: 1px solid #666;
     }
@@ -83,11 +84,12 @@
 
     #footer {
         width: 1000px;
-        background: url(/images/SFW_footer.png) top no-repeat;
-        background-color: #FFF;
-        padding-top: 10px;
+        border-radius: 7px;
+        padding: 10px;
         text-align: center;
         font-size: 70%;
+        background-color: #eaeaea;
+        list-style: none;
     }
 </style>
 
@@ -256,29 +258,27 @@
   </div>
   <div id="content">
     <div id="categories">
-      <form name="category_toggles">
-        <ul id="category_list">
-          <li><label><input type="checkbox" name="trough" checked="true">Horse Troughs</label></li>
-          <li><label><input type="checkbox" name="bin" checked="true">Rubbish Bins</label></li>
-          <li><label><input type="checkbox" name="info" checked="true">Information Pillars</label></li>
-          <li><label><input type="checkbox" name="seat" checked="true">Seats</label></li>
-          <li><label><input type="checkbox" name="drink" checked="true">Drinking Fountains</label></li>
-          <li><label><input type="checkbox" name="picnic" checked="true">Picnic Settings</label></li>
-          <li><label><input type="checkbox" name="rails" checked="true">Bicycle Parking</label></li>
-          <li><label><input type="checkbox" name="corral" checked="true">Bin Corrals</label></li>
-          <li><label><input type="checkbox" name="equip" checked="true">Recreation Equipment Item</label></li>
-          <li><label><input type="checkbox" name="bbq" checked="true">Barbeque</label></li>
-        </ul>
-      </form>
+        <form name="category_toggles" class="category_subbox">
+            <ul id="category_list">
+              <li><label><input type="checkbox" name="trough" checked="true">Horse Troughs</label></li>
+              <li><label><input type="checkbox" name="bin" checked="true">Rubbish Bins</label></li>
+              <li><label><input type="checkbox" name="info" checked="true">Information Pillars</label></li>
+              <li><label><input type="checkbox" name="seat" checked="true">Seats</label></li>
+              <li><label><input type="checkbox" name="drink" checked="true">Drinking Fountains</label></li>
+              <li><label><input type="checkbox" name="picnic" checked="true">Picnic Settings</label></li>
+              <li><label><input type="checkbox" name="rails" checked="true">Bicycle Parking</label></li>
+              <li><label><input type="checkbox" name="corral" checked="true">Bin Corrals</label></li>
+              <li><label><input type="checkbox" name="equip" checked="true">Recreation Equipment Item</label></li>
+              <li><label><input type="checkbox" name="bbq" checked="true">Barbeque</label></li>
+            </ul>
+        </form>
+        <form name="address_form" class="category_subbox">
+         <label for="address">Centre on address:
+            <input type="text" name="address"></label>
+          <input type="submit" name="address_submit" value="Go">
+        </form>
     </div>
     <div id="map"></div>
-    <div id="address_form">
-      <form name="address_form">
-        <label for="address">Centre on address:
-          <input type="text" name="address"></label>
-        <input type="submit" name="address_submit">
-      </form>
-    </div>
   </div>
   <div id="footer">Created by David Cameron 2010</div>
 </div>
